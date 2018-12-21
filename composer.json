@@ -20,7 +20,8 @@
         "laravel/framework": "5.7.*",
         "laravel/passport": "^7.0",
         "laravel/tinker": "^1.0",
-        "php-ai/php-ml": "^0.7.0"
+        "php-ai/php-ml": "^0.7.0",
+        "voku/stop-words": "^2.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -37,7 +38,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

@@ -17,6 +17,7 @@ class CreateDiseaseSymptomTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('disease_id');
             $table->unsignedInteger('symptom_id');
+            $table->unsignedBigInteger('success')->default(0);
             $table->timestamps();
 
             $table->foreign('disease_id')->references('id')->on('diseases')->onDelete('cascade');

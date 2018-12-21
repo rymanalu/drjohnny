@@ -12,4 +12,12 @@ class SymptomVariant extends Model
     {
         return $this->belongsTo(Symptom::class);
     }
+
+    public function scopeSearch($query, $search)
+    {
+        $tsQuery = 'plainto_tsquery(\'pg_catalog.simple\', ?)';
+
+        return $query->whereRaw('variant @@ '.$tsQuery, [$search])
+            ->orderByRaw('ts_rank(variant, '.$tsQuery.') desc', [$search]);
+    }
 }
