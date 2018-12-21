@@ -18,5 +18,5 @@ $botman->hears('Halo', function ($bot) {
 });
 
 $botman->fallback(function ($bot) {
-    $bot->reply('Sorry, I did not understand these commands. Here is a list of commands I understand: ...');
+    $bot->reply('Maaf, saya tidak mengerti maksud Anda 🙏');
 });
