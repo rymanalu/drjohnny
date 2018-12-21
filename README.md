@@ -24,4 +24,4 @@ Experimental chat bot to diagnose a disease by symptoms.
 5. Setup your webhook using ngrok URL (check `messages` and `messanging_postbacks`)
 6. Subscribe the webhook to your page
 7. `php artisan botman:facebook:AddStartButton`
-8. `php artisan botman:facebook:AddGreetingText`
+8. `php artisan botman:facebook:AddMenu`
