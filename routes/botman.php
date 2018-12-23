@@ -9,6 +9,14 @@ $botman->hears(config('botman.facebook.start_button_payload'), function ($bot) {
     $bot->startConversation(new \App\Conversations\GetStartedConversation);
 });
 
+$botman->hears('Mulai diagnosa', function ($bot) {
+    $bot->startConversation(new \App\Conversations\DiagnoseConversation);
+});
+
+$botman->hears('START_DIAGNOSE', function ($bot) {
+    $bot->startConversation(new \App\Conversations\DiagnoseConversation);
+});
+
 $botman->hears('Hai', function ($bot) {
     $bot->reply('Halo!');
 });

@@ -6,11 +6,6 @@ use BotMan\BotMan\Messages\Conversations\Conversation;
 
 class GetStartedConversation extends Conversation
 {
-    /**
-     * Start the conversation.
-     *
-     * @return mixed
-     */
     public function run()
     {
         $this->say(

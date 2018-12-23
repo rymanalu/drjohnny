@@ -81,7 +81,8 @@ class SymptomsTableSeeder extends Seeder
                     'Bengkak pada wajah',
                     'Bengkak pada mulut',
                     'Bengkak pada lidah',
-                    'Pembengkakan pada wajah atau pipi',
+                    'Bengkak pada wajah',
+                    'Bengkak pada pipi',
                 ],
             ],
             'Gatal' => [
@@ -124,25 +125,43 @@ class SymptomsTableSeeder extends Seeder
                 ],
                 'variants' => [],
             ],
-            'Sensitif pada tekanan saat mengunyah atau menggigit' => [
+            'Sakit saat mengunyah' => [
                 'diseases' => [
                     'Abses Gigi',
                 ],
                 'variants' => [],
             ],
-            'Sensitif pada suhu panas atau dingin' => [
+            'Sakit saat menggigit' => [
                 'diseases' => [
                     'Abses Gigi',
                 ],
                 'variants' => [],
             ],
-            'Nyeri parah dan berdenyut pada gigi, yang dapat menyebar ke tulang rahang, leher, atau telinga' => [
+            'Sensitif suhu panas' => [
                 'diseases' => [
                     'Abses Gigi',
                 ],
                 'variants' => [],
             ],
-            'Kemerahan pada mulut dan wajah' => [
+            'Sensitif suhu dingin' => [
+                'diseases' => [
+                    'Abses Gigi',
+                ],
+                'variants' => [],
+            ],
+            'Nyeri pada gigi' => [
+                'diseases' => [
+                    'Abses Gigi',
+                ],
+                'variants' => [],
+            ],
+            'Kemerahan pada mulut' => [
+                'diseases' => [
+                    'Abses Gigi',
+                ],
+                'variants' => [],
+            ],
+            'Kemerahan pada wajah' => [
                 'diseases' => [
                     'Abses Gigi',
                 ],
