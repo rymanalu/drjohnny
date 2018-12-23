@@ -25,3 +25,9 @@ Experimental chat bot to diagnose a disease by symptoms.
 6. Subscribe the webhook to your page
 7. `php artisan botman:facebook:AddStartButton`
 8. `php artisan botman:facebook:AddMenu`
+
+## Setup Telegram Bot
+
+1. Register a new bot [here](https://core.telegram.org/bots#3-how-do-i-create-a-bot)
+2. Grab the token and save it in `.env`
+3. `php artisan botman:telegram:register`

@@ -5,7 +5,13 @@ $botman = resolve('botman');
 $botman->middleware->received(new \App\Http\Middleware\MarkSeen);
 $botman->middleware->sending(new \App\Http\Middleware\StartTyping);
 
+// Facebook Messenger Get Started
 $botman->hears(config('botman.facebook.start_button_payload'), function ($bot) {
+    $bot->startConversation(new \App\Conversations\GetStartedConversation);
+});
+
+// Telegram Get Started
+$botman->hears('/start', function ($bot) {
     $bot->startConversation(new \App\Conversations\GetStartedConversation);
 });
 
@@ -13,7 +19,13 @@ $botman->hears('Mulai diagnosa', function ($bot) {
     $bot->startConversation(new \App\Conversations\DiagnoseConversation);
 });
 
+// Start diagnose from Messenger persistent menu
 $botman->hears('START_DIAGNOSE', function ($bot) {
+    $bot->startConversation(new \App\Conversations\DiagnoseConversation);
+});
+
+// Start diagnose from Telegram command
+$botman->hears('/diagnosa', function ($bot) {
     $bot->startConversation(new \App\Conversations\DiagnoseConversation);
 });
 

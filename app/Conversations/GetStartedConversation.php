@@ -18,6 +18,8 @@ class GetStartedConversation extends Conversation
 
         $this->say('Untuk memulai diagnosa, cukup dengan kirim "Mulai diagnosa" ✍️');
 
-        $this->say('Atau tekan tombol [Mulai diagnosa] di menu 📲');
+        $this->say('Atau tekan tombol [Mulai diagnosa] di menu 📲 (pengguna Facebook Messenger)');
+
+        $this->say('Atau kirim "/diagnosa" ✍️ (pengguna Telegram)');
     }
 }

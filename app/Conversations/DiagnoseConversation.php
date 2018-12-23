@@ -15,8 +15,6 @@ class DiagnoseConversation extends Conversation
 
     protected $symptomIds = [];
 
-    protected $symptomNames = [];
-
     public function run()
     {
         $this->askUserSymptoms();
@@ -29,10 +27,7 @@ class DiagnoseConversation extends Conversation
 
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
-                $symptomName = $answer->getMessage()->getPayload()['message']['text'];
-
                 $this->symptomIds[] = (int) $answer->getValue();
-                $this->symptomNames[] = strtolower($symptomName);
             } else {
                 $this->findSymptom($answer->getText());
             }
@@ -62,7 +57,7 @@ class DiagnoseConversation extends Conversation
 
     protected function askAnythingElse()
     {
-        $this->say('Baik, saat ini keluhan Anda adalah: ' . implode(', ', $this->symptomNames) . ' 📝');
+        $this->say('Baik, keluhan Anda sudah saya catat 📝');
 
         $question = Question::create('Adakah gejala lain yang ingin Anda bagikan? 😊')
             ->addButtons([
@@ -84,14 +79,12 @@ class DiagnoseConversation extends Conversation
 
     protected function findSymptom($search)
     {
-        $variantName = remove_stop_words($search);
+        $search = remove_stop_words($search);
 
-        $symptomVariant = SymptomVariant::search($variantName)->first();
+        $symptomVariant = SymptomVariant::search($search)->first();
 
         if ($symptomVariant) {
             $this->symptomIds[] = $symptomVariant->symptom->id;
         }
-
-        $this->symptomNames[] = strtolower($search);
     }
 }
