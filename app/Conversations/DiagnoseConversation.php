@@ -2,6 +2,7 @@
 
 namespace App\Conversations;
 
+use App\Disease;
 use App\Symptom;
 use App\SymptomVariant;
 use BotMan\BotMan\Messages\Conversations\Conversation;
@@ -13,10 +14,12 @@ class DiagnoseConversation extends Conversation
 {
     const MAX_BUTTONS = 5;
 
-    protected $symptomIds = [];
+    protected $symptoms;
 
     public function run()
     {
+        $this->symptoms = collect();
+
         $this->askUserSymptoms();
     }
 
@@ -27,7 +30,9 @@ class DiagnoseConversation extends Conversation
 
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
-                $this->symptomIds[] = (int) $answer->getValue();
+                $this->symptoms->push(
+                    Symptom::find($answer->getValue())
+                );
             } else {
                 $this->findSymptom($answer->getText());
             }
@@ -41,7 +46,7 @@ class DiagnoseConversation extends Conversation
         $buttons = [];
 
         $symptoms = Symptom::query()
-            ->whereNotIn('id', $this->symptomIds)
+            ->whereNotIn('id', $this->symptoms->pluck('id')->toArray())
             ->inRandomOrder()
             ->take(5)
             ->cursor();
@@ -71,8 +76,7 @@ class DiagnoseConversation extends Conversation
             if (strtolower($answerText) === 'yes' || strtolower($answerText) === 'ya') {
                 $this->askUserSymptoms();
             } else {
-                $this->say('Mantap!');
-                $this->say(json_encode($this->symptomIds));
+                $this->diagnose();
             }
         });
     }
@@ -81,10 +85,43 @@ class DiagnoseConversation extends Conversation
     {
         $search = remove_stop_words($search);
 
-        $symptomVariant = SymptomVariant::search($search)->first();
+        $symptomVariant = SymptomVariant::search($search)
+            ->whereNotIn('symptom_id', $this->symptoms->pluck('id')->toArray())
+            ->first();
 
         if ($symptomVariant) {
-            $this->symptomIds[] = $symptomVariant->symptom->id;
+            $this->symptoms->push($symptomVariant->symptom);
         }
+    }
+
+    protected function diagnose()
+    {
+        $this->say('Baik, saat ini saya akan mulai menganalisa... 🤔');
+
+        $possibilityDiseases = [];
+
+        foreach ($this->symptoms as $symptom) {
+            foreach ($symptom->diseases as $disease) {
+                if (array_key_exists($disease->name, $possibilityDiseases)) {
+                    $count = $possibilityDiseases[$disease->name];
+                    $possibilityDiseases[$disease->name] = $count + 1;
+                } else {
+                    $possibilityDiseases[$disease->name] = 1;
+                }
+            }
+        }
+
+        if (count($possibilityDiseases) > 0) {
+            arsort($possibilityDiseases);
+
+            $this->say('Sepertinya saat ini Anda mengidap penyakit: ' . array_keys($possibilityDiseases)[0]);
+            $this->say('Ini masih prediksi dan tidak bisa dijadikan acuan 🙏');
+            $this->say('Silakan segera melakukan pengobatan yang diperlukan 💊');
+        } else {
+            $this->say('Mohon maaf, saat ini saya tidak bisa memprediksi penyakit Anda 😞');
+            $this->say('Silakan ulangi diagnosa bila diperlukan 🙏');
+        }
+
+        $this->say('Terima kasih 😊');
     }
 }
