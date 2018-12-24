@@ -22,7 +22,6 @@
         "laravel/framework": "5.7.*",
         "laravel/passport": "^7.0",
         "laravel/tinker": "^1.0",
-        "php-ai/php-ml": "^0.7.0",
         "voku/stop-words": "^2.0"
     },
     "require-dev": {
