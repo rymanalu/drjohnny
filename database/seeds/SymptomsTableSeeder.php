@@ -15,8 +15,10 @@ class SymptomsTableSeeder extends Seeder
     {
         Symptom::query()->truncate();
 
-        foreach ($this->symptoms() as $name => $data) {
-            $symptomData = compact('name');
+        $data = json_decode(file_get_contents(base_path('data.json')), true);
+
+        foreach ($data['symptoms'] as $data) {
+            $symptomData = ['name' => $data['name']];
 
             $symptom = Symptom::create($symptomData);
 
@@ -30,143 +32,5 @@ class SymptomsTableSeeder extends Seeder
 
             $symptom->diseases()->attach($diseases->pluck('id')->toArray());
         }
-    }
-
-    protected function symptoms()
-    {
-        return [
-            'Bersin' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [
-                    'Bersin-bersin',
-                ],
-            ],
-            'Batuk' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [
-                    'Batuk-batuk',
-                ],
-            ],
-            'Sesak napas' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [],
-            ],
-            'Ruam' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [
-                    'Ruam pada kulit',
-                ],
-            ],
-            'Ingus' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [
-                    'Hidung beringus',
-                ],
-            ],
-            'Bengkak' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [
-                    'Bengkak pada wajah',
-                    'Bengkak pada mulut',
-                    'Bengkak pada lidah',
-                    'Bengkak pada wajah',
-                    'Bengkak pada pipi',
-                ],
-            ],
-            'Gatal' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [
-                    'Gatal pada mata',
-                ],
-            ],
-            'Mata merah' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [],
-            ],
-            'Mata berair' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [],
-            ],
-            'Sakit perut' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [],
-            ],
-            'Muntah' => [
-                'diseases' => [
-                    'Alergi',
-                ],
-                'variants' => [
-                    'Muntah-muntah',
-                ],
-            ],
-            'Demam' => [
-                'diseases' => [
-                    'Abses Gigi',
-                ],
-                'variants' => [],
-            ],
-            'Sakit saat mengunyah' => [
-                'diseases' => [
-                    'Abses Gigi',
-                ],
-                'variants' => [],
-            ],
-            'Sakit saat menggigit' => [
-                'diseases' => [
-                    'Abses Gigi',
-                ],
-                'variants' => [],
-            ],
-            'Sensitif suhu panas' => [
-                'diseases' => [
-                    'Abses Gigi',
-                ],
-                'variants' => [],
-            ],
-            'Sensitif suhu dingin' => [
-                'diseases' => [
-                    'Abses Gigi',
-                ],
-                'variants' => [],
-            ],
-            'Nyeri pada gigi' => [
-                'diseases' => [
-                    'Abses Gigi',
-                ],
-                'variants' => [],
-            ],
-            'Kemerahan pada mulut' => [
-                'diseases' => [
-                    'Abses Gigi',
-                ],
-                'variants' => [],
-            ],
-            'Kemerahan pada wajah' => [
-                'diseases' => [
-                    'Abses Gigi',
-                ],
-                'variants' => [],
-            ],
-        ];
     }
 }

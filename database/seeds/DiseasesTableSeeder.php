@@ -14,15 +14,10 @@ class DiseasesTableSeeder extends Seeder
     {
         Disease::query()->truncate();
 
-        foreach ($this->diseases() as $name) {
+        $data = json_decode(file_get_contents(base_path('data.json')), true);
+
+        foreach ($data['diseases'] as $name) {
             Disease::create(compact('name'));
         }
-    }
-
-    protected function diseases()
-    {
-        return [
-            'Abses Gigi', 'Alergi',
-        ];
     }
 }

@@ -1,0 +1,177 @@
+{
+    "diseases": [
+        "Abses Gigi",
+        "Alergi"
+    ],
+    "symptoms": [
+        {
+            "name": "Demam",
+            "diseases": [
+                "Abses Gigi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sakit saat mengunyah",
+            "diseases": [
+                "Abses Gigi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sakit saat menggigit",
+            "diseases": [
+                "Abses Gigi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sensitif suhu panas",
+            "diseases": [
+                "Abses Gigi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sensitif suhu dingin",
+            "diseases": [
+                "Abses Gigi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Nyeri pada gigi",
+            "diseases": [
+                "Abses Gigi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Kemerahan pada mulut",
+            "diseases": [
+                "Abses Gigi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Kemerahan pada wajah",
+            "diseases": [
+                "Abses Gigi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Bersin",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": [
+                "Bersin-bersin"
+            ]
+        },
+        {
+            "name": "Batuk",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": [
+                "Batuk-batuk"
+            ]
+        },
+        {
+            "name": "Sesak napas",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Ruam pada kulit",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Ingus",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": [
+                "Hidung beringus"
+            ]
+        },
+        {
+            "name": "Bengkak pada wajah",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Bengkak pada mulut",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Bengkak pada lidah",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Bengkak pada wajah",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Bengkak pada pipi",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Gatal pada mata",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Mata merah",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Mata berair",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sakit perut",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Muntah",
+            "diseases": [
+                "Alergi"
+            ],
+            "variants": [
+                "Muntah-muntah"
+            ]
+        }
+    ]
+}
