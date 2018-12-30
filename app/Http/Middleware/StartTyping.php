@@ -9,7 +9,7 @@ class StartTyping implements Sending
 {
     public function sending($payload, $next, BotMan $bot)
     {
-        $bot->typesAndWaits(1.5);
+        $bot->typesAndWaits(1);
 
         return $next($payload);
     }
