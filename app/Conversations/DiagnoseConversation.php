@@ -2,7 +2,6 @@
 
 namespace App\Conversations;
 
-use App\Disease;
 use App\Symptom;
 use App\SymptomVariant;
 use BotMan\BotMan\Messages\Conversations\Conversation;
@@ -14,13 +13,53 @@ class DiagnoseConversation extends Conversation
 {
     const MAX_BUTTONS = 5;
 
+    const MIN_SYMPTOMS = 3;
+
     protected $symptoms;
+
+    protected $symptomCounter = 0;
 
     public function run()
     {
         $this->symptoms = collect();
 
-        $this->askUserSymptoms();
+        $this->confirmation();
+    }
+
+    protected function confirmation()
+    {
+        $question = $this->confirmationQuestion();
+
+        $this->ask($question, function (Answer $answer) {
+            if ($answer->isInteractiveMessageReply()) {
+                if ($answer->getValue() === 'yes') {
+                    $this->askUserSymptoms();
+                } else {
+                    $this->say('Well, bye!');
+                }
+            } else {
+                $reply = strtolower($answer->getText());
+
+                if ($reply === 'ya') {
+                    $this->askUserSymptoms();
+                } elseif ($reply === 'tidak') {
+                    $this->say('Well, bye!');
+                } else {
+                    $this->repeat($this->confirmationQuestion(true));
+                }
+            }
+        });
+    }
+
+    protected function confirmationQuestion($repeat = false)
+    {
+        $questionText = $repeat ? 'Saya ulangi, bersedia?' : 'Untuk memulai diagnosa, saya akan menanyakan gejala yang Anda rasakan. Bersedia?';
+
+        return Question::create($questionText)
+            ->addButtons([
+                Button::create('Ya 👍')->value('yes'),
+                Button::create('Tidak 👎')->value('no'),
+            ]);
     }
 
     protected function askUserSymptoms()
@@ -30,12 +69,12 @@ class DiagnoseConversation extends Conversation
 
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
-                $this->symptoms->push(
-                    Symptom::find($answer->getValue())
-                );
+                $this->symptoms->push(Symptom::find($answer->getValue()));
             } else {
                 $this->findSymptom($answer->getText());
             }
+
+            $this->symptomCounter++;
 
             $this->askAnythingElse();
         });
@@ -48,7 +87,7 @@ class DiagnoseConversation extends Conversation
         $symptoms = Symptom::query()
             ->whereNotIn('id', $this->symptoms->pluck('id')->toArray())
             ->inRandomOrder()
-            ->take(5)
+            ->take(static::MAX_BUTTONS)
             ->cursor();
 
         foreach ($symptoms as $symptom) {
@@ -62,23 +101,58 @@ class DiagnoseConversation extends Conversation
 
     protected function askAnythingElse()
     {
-        $this->say('Baik, keluhan Anda sudah saya catat 📝');
+        $this->say('Baik, gejala Anda sudah tercatat 📝');
 
-        $question = Question::create('Adakah gejala lain yang ingin Anda bagikan? 😊')
-            ->addButtons([
-                Button::create('Ya')->value('yes'),
-                Button::create('Tidak')->value('no'),
-            ]);
+        $question = $this->askAnythingElseQuestion();
 
         $this->ask($question, function (Answer $answer) {
-            $answerText = $answer->isInteractiveMessageReply() ? $answer->getValue() : $answer->getText();
-
-            if (strtolower($answerText) === 'yes' || strtolower($answerText) === 'ya') {
-                $this->askUserSymptoms();
+            if ($answer->isInteractiveMessageReply()) {
+                if ($answer->getValue() === 'yes') {
+                    $this->askUserSymptoms();
+                } else {
+                    if ($this->symptomCounter < static::MIN_SYMPTOMS) {
+                        $this->askMoreSymptoms();
+                    } else {
+                        $this->diagnose();
+                    }
+                }
             } else {
-                $this->diagnose();
+                $this->repeat($this->askAnythingElseQuestion(true));
             }
         });
+    }
+
+    protected function askAnythingElseQuestion($repeat = false)
+    {
+        $questionText = $repeat ? 'Ya atau tidak? 🤔' : 'Adakah gejala lain yang ingin Anda bagikan? 😊';
+
+        return Question::create($questionText)
+            ->addButtons([
+                Button::create('Ya 👍')->value('yes'),
+                Button::create('Tidak 👎')->value('no'),
+            ]);
+    }
+
+    protected function askMoreSymptoms()
+    {
+        $this->say('Demi akurasi analisa, baiknya Anda memberitahu setidaknya '.static::MIN_SYMPTOMS.' gejala 😊');
+
+        $question = $this->askMoreSymptomsQuestion();
+
+        $this->ask($question, function (Answer $answer) {
+            if ($answer->isInteractiveMessageReply()) {
+                $this->askUserSymptoms();
+            } else {
+                $this->repeat($this->askMoreSymptomsQuestion(true));
+            }
+        });
+    }
+
+    protected function askMoreSymptomsQuestion($repeat = false)
+    {
+        $questionText = $repeat ? 'Tekan OK untuk melanjutkan' : 'Lanjutkan?';
+
+        return Question::create($questionText)->addButton(Button::create('OK 👌')->value('ok'));
     }
 
     protected function findSymptom($search)
@@ -115,7 +189,6 @@ class DiagnoseConversation extends Conversation
             arsort($possibilityDiseases);
 
             $this->say('Sepertinya saat ini Anda mengidap penyakit: ' . array_keys($possibilityDiseases)[0]);
-            $this->say('Ini masih prediksi dan tidak bisa dijadikan acuan 🙏');
             $this->say('Silakan segera melakukan pengobatan yang diperlukan 💊');
         } else {
             $this->say('Mohon maaf, saat ini saya tidak bisa memprediksi penyakit Anda 😞');

@@ -19,16 +19,6 @@ $botman->hears('Mulai diagnosa', function ($bot) {
     $bot->startConversation(new \App\Conversations\DiagnoseConversation);
 });
 
-// Start diagnose from Messenger persistent menu
-$botman->hears('START_DIAGNOSE', function ($bot) {
-    $bot->startConversation(new \App\Conversations\DiagnoseConversation);
-});
-
-// Start diagnose from Telegram command
-$botman->hears('/diagnosa', function ($bot) {
-    $bot->startConversation(new \App\Conversations\DiagnoseConversation);
-});
-
 $botman->hears('Hai', function ($bot) {
     $bot->reply('Halo!');
 });

@@ -62,7 +62,6 @@ class GetStartedConversation extends Conversation
             $buttons[] = Button::create('Nanti saja 👋')->value('later');
         }
 
-        return Question::create($questionText)
-            ->addButtons($buttons);
+        return Question::create($questionText)->addButtons($buttons);
     }
 }

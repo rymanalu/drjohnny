@@ -71,23 +71,23 @@ return [
     |
     */
     'persistent_menu' => [
-        [
-            'locale' => 'default',
-            'composer_input_disabled' => 'false',
-            'call_to_actions' => [
-                [
-                    'title' => 'Mulai diagnosa',
-                    'type' => 'postback',
-                    'payload' => 'START_DIAGNOSE',
-                ],
+//        [
+//            'locale' => 'default',
+//            'composer_input_disabled' => 'false',
+//            'call_to_actions' => [
+//                [
+//                    'title' => 'Mulai diagnosa',
+//                    'type' => 'postback',
+//                    'payload' => 'START_DIAGNOSE',
+//                ],
 //                [
 //                    'type' => 'web_url',
 //                    'title' => 'Latest News',
 //                    'url' => 'http://botman.io',
 //                    'webview_height_ratio' => 'full',
 //                ],
-            ],
-        ],
+//            ],
+//        ],
     ],
 
     /*
