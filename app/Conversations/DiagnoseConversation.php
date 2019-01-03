@@ -2,6 +2,7 @@
 
 namespace App\Conversations;
 
+use App\Disease;
 use App\Symptom;
 use App\SymptomVariant;
 use BotMan\BotMan\Messages\Conversations\Conversation;
@@ -15,14 +16,12 @@ class DiagnoseConversation extends Conversation
 
     const MIN_SYMPTOMS = 3;
 
-    protected $symptoms;
+    protected $symptomIds = [];
 
     protected $symptomCounter = 0;
 
     public function run()
     {
-        $this->symptoms = collect();
-
         $this->confirmation();
     }
 
@@ -53,7 +52,7 @@ class DiagnoseConversation extends Conversation
 
     protected function confirmationQuestion($repeat = false)
     {
-        $questionText = $repeat ? 'Saya ulangi, bersedia?' : 'Untuk memulai diagnosa, saya akan menanyakan gejala yang Anda rasakan. Bersedia?';
+        $questionText = $repeat ? 'Saya ulangi, bersedia?' : 'Untuk memulai diagnosa, saya akan menanyakan setidaknya '.static::MIN_SYMPTOMS.' gejala yang Anda alami. Bersedia?';
 
         return Question::create($questionText)
             ->addButtons([
@@ -62,22 +61,33 @@ class DiagnoseConversation extends Conversation
             ]);
     }
 
-    protected function askUserSymptoms()
+    protected function askUserSymptoms($more = false)
     {
-        $question = Question::create('Silakan pilih salah satu gejala di bawah ini, atau ketik saja 😊')
-            ->addButtons($this->createSymptomQuestionButtons());
+        $question = $this->askUserSymptomsQuestion($more);
 
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
-                $this->symptoms->push(Symptom::find($answer->getValue()));
+                $this->symptomIds[] = $answer->getValue();
             } else {
                 $this->findSymptom($answer->getText());
             }
 
             $this->symptomCounter++;
 
-            $this->askAnythingElse();
+            $this->say('Baik, gejala Anda sudah tercatat 📝');
+
+            if ($this->symptomCounter > 2) {
+                $this->askAnythingElse();
+            } else {
+                $this->askUserSymptoms(true);
+            }
         });
+    }
+
+    protected function askUserSymptomsQuestion($more = false)
+    {
+        return Question::create('Silakan pilih salah satu gejala'.($more ? ' lagi ' : ' ').'di bawah ini, atau ketik saja 😊')
+            ->addButtons($this->createSymptomQuestionButtons());
     }
 
     protected function createSymptomQuestionButtons()
@@ -85,7 +95,7 @@ class DiagnoseConversation extends Conversation
         $buttons = [];
 
         $symptoms = Symptom::query()
-            ->whereNotIn('id', $this->symptoms->pluck('id')->toArray())
+            ->whereNotIn('id', $this->symptomIds)
             ->inRandomOrder()
             ->take(static::MAX_BUTTONS)
             ->cursor();
@@ -101,8 +111,6 @@ class DiagnoseConversation extends Conversation
 
     protected function askAnythingElse()
     {
-        $this->say('Baik, gejala Anda sudah tercatat 📝');
-
         $question = $this->askAnythingElseQuestion();
 
         $this->ask($question, function (Answer $answer) {
@@ -160,11 +168,11 @@ class DiagnoseConversation extends Conversation
         $search = remove_stop_words($search);
 
         $symptomVariant = SymptomVariant::search($search)
-            ->whereNotIn('symptom_id', $this->symptoms->pluck('id')->toArray())
+            ->whereNotIn('symptom_id', $this->symptomIds)
             ->first();
 
         if ($symptomVariant) {
-            $this->symptoms->push($symptomVariant->symptom);
+            $this->symptomIds[] = $symptomVariant->symptom->id;
         }
     }
 
@@ -172,26 +180,19 @@ class DiagnoseConversation extends Conversation
     {
         $this->say('Baik, saat ini saya akan mulai menganalisa... 🤔');
 
-        $possibilityDiseases = [];
+        $disease = Disease::predictBySymptomIds($this->symptomIds);
 
-        foreach ($this->symptoms as $symptom) {
-            foreach ($symptom->diseases as $disease) {
-                if (array_key_exists($disease->name, $possibilityDiseases)) {
-                    $count = $possibilityDiseases[$disease->name];
-                    $possibilityDiseases[$disease->name] = $count + 1;
-                } else {
-                    $possibilityDiseases[$disease->name] = 1;
-                }
+        if ($disease) {
+            $this->say('Sepertinya saat ini Anda mengidap penyakit: ' . $disease->name);
+
+            if ($disease->description) {
+                $this->say($disease->description);
             }
-        }
 
-        if (count($possibilityDiseases) > 0) {
-            arsort($possibilityDiseases);
-
-            $this->say('Sepertinya saat ini Anda mengidap penyakit: ' . array_keys($possibilityDiseases)[0]);
-            $this->say('Silakan segera melakukan pengobatan yang diperlukan 💊');
+            $this->say('Segera melakukan pengobatan yang diperlukan 💊');
         } else {
             $this->say('Mohon maaf, saat ini saya tidak bisa memprediksi penyakit Anda 😞');
+
             $this->say('Silakan ulangi diagnosa bila diperlukan 🙏');
         }
 

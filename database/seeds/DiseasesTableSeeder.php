@@ -16,8 +16,8 @@ class DiseasesTableSeeder extends Seeder
 
         $data = json_decode(file_get_contents(base_path('data.json')), true);
 
-        foreach ($data['diseases'] as $name) {
-            Disease::create(compact('name'));
+        foreach ($data['diseases'] as $disease) {
+            Disease::create($disease);
         }
     }
 }

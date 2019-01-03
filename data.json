@@ -1,7 +1,13 @@
 {
     "diseases": [
-        "Abses Gigi",
-        "Alergi"
+        {
+            "name": "Abses Gigi",
+            "description": "Abses gigi adalah terbentuknya kantung atau benjolan berisi nanah pada gigi yang disebabkan oleh infeksi bakteri. Abses gigi biasanya muncul pada ujung akar gigi (abses periapikal). Infeksi bakteri penyebab abses gigi umumnya terjadi pada orang dengan kebersihan dan kesehatan gigi yang buruk. Nanah yang berkumpul pada benjolan, lambat laun akan terasa bertambah nyeri. Penyakit ini dapat dicegah dengan cara menyikat gigi secara rutin atau membersihkan gigi menggunakan benang gigi. Sebaiknya seseorang rutin memeriksakan giginya ke dokter gigi untuk menghindari terjadinya kerusakan dan abses gigi."
+        },
+        {
+            "name": "Alergi",
+            "description": "Alergi adalah reaksi sistem kekebalan tubuh terhadap sesuatu yang dianggap asing, baik berbahaya atau pun tidak. Ini bisa berupa substansi yang masuk atau bersentuhan dengan tubuh. Alergen atau substansi pemicu alergi hanya berdampak pada orang yang memiliki alergi tersebut. Pada orang lain, alergen tersebut tidak akan memicu reaksi kekebalan tubuh. Beberapa jenis substansi yang dapat menyebabkan reaksi alergi meliputi gigitan serangga, tungau debu, bulu hewan, obat-obatan, makanan tertentu, serta serbuk sari."
+        }
     ],
     "symptoms": [
         {
