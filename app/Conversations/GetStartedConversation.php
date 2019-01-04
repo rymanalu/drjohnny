@@ -25,8 +25,9 @@ class GetStartedConversation extends Conversation
         $question = $this->getStartedQuestion();
 
         $diagnoseConversation = new DiagnoseConversation;
+        $laterConversation = new LaterConversation;
 
-        $this->ask($question, function (Answer $answer) use ($diagnoseConversation) {
+        $this->ask($question, function (Answer $answer) use ($diagnoseConversation, $laterConversation) {
             if ($answer->isInteractiveMessageReply()) {
                 $value = $answer->getValue();
 
@@ -37,6 +38,7 @@ class GetStartedConversation extends Conversation
                     case 'disease_info':
                         break;
                     case 'later':
+                        $this->bot->startConversation($laterConversation);
                         break;
                 }
             } else {

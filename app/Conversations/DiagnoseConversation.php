@@ -29,12 +29,14 @@ class DiagnoseConversation extends Conversation
     {
         $question = $this->confirmationQuestion();
 
-        $this->ask($question, function (Answer $answer) {
+        $laterConversation = new LaterConversation('Baiklah kalau begitu 😊');
+
+        $this->ask($question, function (Answer $answer) use ($laterConversation) {
             if ($answer->isInteractiveMessageReply()) {
                 if ($answer->getValue() === 'yes') {
                     $this->askUserSymptoms();
                 } else {
-                    $this->say('Well, bye!');
+                    $this->bot->startConversation($laterConversation);
                 }
             } else {
                 $reply = strtolower($answer->getText());
@@ -42,7 +44,7 @@ class DiagnoseConversation extends Conversation
                 if ($reply === 'ya') {
                     $this->askUserSymptoms();
                 } elseif ($reply === 'tidak') {
-                    $this->say('Well, bye!');
+                    $this->bot->startConversation($laterConversation);
                 } else {
                     $this->repeat($this->confirmationQuestion(true));
                 }
