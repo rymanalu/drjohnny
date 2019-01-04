@@ -9,13 +9,27 @@ use BotMan\BotMan\Messages\Outgoing\Question;
 
 class GetStartedConversation extends Conversation
 {
+    protected $intro;
+
+    protected $useGreeting;
+
+    public function __construct($intro = null, $useGreeting = true)
+    {
+        $this->intro = $intro;
+        $this->useGreeting = $useGreeting;
+    }
+
     public function run()
     {
-        $this->say(
-            collect(['Selamat datang!', 'Halo!', 'Hai!'])->random().' 🙌'
-        );
+        if ($this->useGreeting) {
+            $this->say(
+                collect(['Selamat datang!', 'Halo!', 'Hai!'])->random().' 🙌'
+            );
+        }
 
-        $this->say('Perkenalkan, saya Dr. Johnny 👨‍⚕️ Dokter virtual dalam bentuk chatbot 🤖');
+        if (! $this->intro) {
+            $this->say('Perkenalkan, saya Dr. Johnny 👨‍⚕️ Dokter virtual dalam bentuk chatbot 🤖');
+        }
 
         $this->getStarted();
     }
@@ -62,6 +76,10 @@ class GetStartedConversation extends Conversation
             $questionText = 'Silakan pilih salah satu dari tombol dibawah ini untuk memulai:';
 
             $buttons[] = Button::create('Nanti saja 👋')->value('later');
+        }
+
+        if ($this->intro && is_string($this->intro)) {
+            $questionText = $this->intro;
         }
 
         return Question::create($questionText)->addButtons($buttons);

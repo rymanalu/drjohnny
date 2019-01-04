@@ -20,13 +20,11 @@ $botman->hears('Mulai diagnosa', function ($bot) {
 });
 
 $botman->hears('Hai', function ($bot) {
-    $bot->reply('Halo!');
-});
-
-$botman->hears('Halo', function ($bot) {
-    $bot->reply('Hai!');
+    $bot->startConversation(new \App\Conversations\GetStartedConversation('Ada yang bisa saya bantu? 😊'));
 });
 
 $botman->fallback(function ($bot) {
     $bot->reply('Maaf, saya tidak mengerti maksud Anda 🙏');
+
+    $bot->startConversation(new \App\Conversations\GetStartedConversation('Silakan pilih salah satu dari tombol dibawah ini untuk memulai:', false));
 });
