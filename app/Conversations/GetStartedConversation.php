@@ -13,17 +13,20 @@ class GetStartedConversation extends Conversation
 
     protected $useGreeting;
 
-    public function __construct($intro = null, $useGreeting = true)
+    protected $useLater;
+
+    public function __construct($intro = null, $useGreeting = true, $useLater = false)
     {
         $this->intro = $intro;
         $this->useGreeting = $useGreeting;
+        $this->useLater = $useLater;
     }
 
     public function run()
     {
         if ($this->useGreeting) {
             $this->say(
-                collect(['Selamat datang!', 'Halo!', 'Hai!'])->random().' 🙌'
+                collect(['Selamat datang', 'Halo', 'Hai'])->random().', '.$this->bot->getUser()->getFirstName().'! 🙌'
             );
         }
 
@@ -70,8 +73,10 @@ class GetStartedConversation extends Conversation
             Button::create('Info Penyakit 🤒')->value('disease_info'),
         ];
 
-        if ($repeat) {
-            $this->say('Maaf, saya tidak mengerti maksud Anda 🙏');
+        if ($repeat || $this->useLater) {
+            if ($repeat) {
+                $this->say('Maaf, saya tidak mengerti maksud Anda 🙏');
+            }
 
             $questionText = 'Silakan pilih salah satu dari tombol dibawah ini untuk memulai:';
 

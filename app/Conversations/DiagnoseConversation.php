@@ -59,7 +59,7 @@ class DiagnoseConversation extends Conversation
         return Question::create($questionText)
             ->addButtons([
                 Button::create('Ya 👍')->value('yes'),
-                Button::create('Tidak 👎')->value('no'),
+                Button::create('Tidak 🙅‍♂️')->value('no'),
             ]);
     }
 
@@ -113,9 +113,11 @@ class DiagnoseConversation extends Conversation
 
     protected function askAnythingElse()
     {
+        $getStartedConversation = new GetStartedConversation('Ada hal lain yang bisa saya bantu? 😊', false, true);
+
         $question = $this->askAnythingElseQuestion();
 
-        $this->ask($question, function (Answer $answer) {
+        $this->ask($question, function (Answer $answer) use ($getStartedConversation) {
             if ($answer->isInteractiveMessageReply()) {
                 if ($answer->getValue() === 'yes') {
                     $this->askUserSymptoms();
@@ -124,6 +126,7 @@ class DiagnoseConversation extends Conversation
                         $this->askMoreSymptoms();
                     } else {
                         $this->diagnose();
+                        $this->bot->startConversation($getStartedConversation);
                     }
                 }
             } else {
@@ -139,7 +142,7 @@ class DiagnoseConversation extends Conversation
         return Question::create($questionText)
             ->addButtons([
                 Button::create('Ya 👍')->value('yes'),
-                Button::create('Tidak 👎')->value('no'),
+                Button::create('Tidak 🙅‍♂️')->value('no'),
             ]);
     }
 
@@ -191,13 +194,11 @@ class DiagnoseConversation extends Conversation
                 $this->say($disease->description);
             }
 
-            $this->say('Segera melakukan pengobatan yang diperlukan 💊');
+            $this->say('Segera lakukan pengobatan yang diperlukan 💊');
         } else {
             $this->say('Mohon maaf, saat ini saya tidak bisa memprediksi penyakit Anda 😞');
 
             $this->say('Silakan ulangi diagnosa bila diperlukan 🙏');
         }
-
-        $this->say('Terima kasih 😊');
     }
 }
