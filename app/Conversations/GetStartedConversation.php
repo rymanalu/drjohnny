@@ -75,7 +75,7 @@ class GetStartedConversation extends Conversation
 
         if ($repeat || $this->useLater) {
             if ($repeat) {
-                $this->say('Maaf, saya tidak mengerti maksud Anda 🙏');
+                $this->say('Mohon maaf, saya tidak mengerti maksud Anda 🙏');
             }
 
             $questionText = 'Silakan pilih salah satu dari tombol dibawah ini untuk memulai:';
