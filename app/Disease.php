@@ -23,4 +23,12 @@ class Disease extends Model
             ->orderBy('count', 'desc')
             ->first();
     }
+
+    public function scopeSearch($query, $search)
+    {
+        $tsQuery = 'plainto_tsquery(\'pg_catalog.simple\', ?)';
+
+        return $query->whereRaw('name_ts @@ '.$tsQuery, [$search])
+            ->orderByRaw('ts_rank(name_ts, '.$tsQuery.') desc', [$search]);
+    }
 }
