@@ -20,7 +20,9 @@ class DiseaseInfoConversation extends Conversation
         $question = Question::create('Silakan pilih salah satu penyakit di bawah ini, atau ketik saja 😊')
             ->addButtons($this->randomDiseases()->toArray());
 
-        $this->ask($question, function (Answer $answer) {
+        $getStartedConversation = new GetStartedConversation('Ada hal lain yang bisa saya bantu? 😊', false, true);
+
+        $this->ask($question, function (Answer $answer) use ($getStartedConversation) {
             if ($answer->isInteractiveMessageReply()) {
                 $disease = \App\Disease::find($answer->getValue());
 
@@ -32,6 +34,8 @@ class DiseaseInfoConversation extends Conversation
             } else {
                 $this->findDiseaseByName($answer->getText());
             }
+
+            $this->bot->startConversation($getStartedConversation);
         });
     }
 

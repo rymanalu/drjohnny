@@ -1,19 +1,133 @@
 {
     "diseases": [
         {
+            "name": "Ablasi Retina",
+            "description": "Ablasi retina adalah kondisi ketika retina (lapisan tipis yang terletak di bagian belakang mata) mulai terlepas dari pembuluh-pembuluh darah yang menyalurkan oksigen dan nutrisi. Retina merupakan bagian penting dari mata yang berfungsi untuk memproses semua cahaya masuk ke mata."
+        },
+        {
+            "name": "Abses Anus",
+            "description": "Abses anus adalah suatu penyakit yang menimbulkan nyeri pada daerah anus akibat infeksi pada kelenjar-kelenjar kecil di dinding anus. Katup anus internal (sphincter ani internus) berfungsi untuk mencegah infeksi dari rongga usus ke jaringan di sekitar anus (perianal). Namun, jika infeksi dari usus berhasil menembus katup ini, penyebaran infeksi dapat mencapai jaringan perianal dan menyebabkan abses anus."
+        },
+        {
             "name": "Abses Gigi",
             "description": "Abses gigi adalah terbentuknya kantung atau benjolan berisi nanah pada gigi yang disebabkan oleh infeksi bakteri. Abses gigi biasanya muncul pada ujung akar gigi (abses periapikal). Infeksi bakteri penyebab abses gigi umumnya terjadi pada orang dengan kebersihan dan kesehatan gigi yang buruk. Nanah yang berkumpul pada benjolan, lambat laun akan terasa bertambah nyeri. Penyakit ini dapat dicegah dengan cara menyikat gigi secara rutin atau membersihkan gigi menggunakan benang gigi. Sebaiknya seseorang rutin memeriksakan giginya ke dokter gigi untuk menghindari terjadinya kerusakan dan abses gigi."
         },
         {
             "name": "Alergi",
             "description": "Alergi adalah reaksi sistem kekebalan tubuh terhadap sesuatu yang dianggap asing, baik berbahaya atau pun tidak. Ini bisa berupa substansi yang masuk atau bersentuhan dengan tubuh. Alergen atau substansi pemicu alergi hanya berdampak pada orang yang memiliki alergi tersebut. Pada orang lain, alergen tersebut tidak akan memicu reaksi kekebalan tubuh. Beberapa jenis substansi yang dapat menyebabkan reaksi alergi meliputi gigitan serangga, tungau debu, bulu hewan, obat-obatan, makanan tertentu, serta serbuk sari."
+        },
+        {
+            "name": "Anemia",
+            "description": "Anemia adalah suatu kondisi ketika tubuh kekurangan sel darah yang mengandung hemoglobin untuk menyebarkan oksigen ke seluruh organ tubuh. Dengan kondisi tersebut, penderita biasanya akan merasa letih dan lelah, sehingga tidak dapat melakukan aktivitas secara optimal."
+        },
+        {
+            "name": "Batuk",
+            "description": "Batuk adalah respon alami dari tubuh sebagai sistem pertahanan untuk mengeluarkan zat dan partikel dari dalam saluran pernapasan, serta mencegah benda asing masuk ke saluran napas bawah."
+        },
+        {
+            "name": "Bronkitis",
+            "description": "Bronkitis adalah peradangan yang terjadi pada saluran utama pernapasan atau bronkus. Bronkus sendiri berfungsi sebagai saluran yang membawa udara dari dan menuju paru-paru. Seseorang yang menderita bronkitis biasanya ditandai dengan munculnya gejala batuk yang berlangsung selama satu minggu atau lebih."
+        },
+        {
+            "name": "Demam",
+            "description": "Demam adalah kondisi ketika suhu tubuh berada di atas angka 38 derajat celsius. Demam merupakan bagian dari proses kekebalan tubuh yang sedang melawan infeksi akibat virus, bakteri, atau parasit. Selain itu, demam juga bisa terjadi pada kondisi hipertiroidisme, artritis, atau karena penggunaan beberapa jenis obat-obatan, termasuk antibiotik. Kenaikan suhu tubuh akibat konsumsi obat ini disebut dengan demam obat atau “drug fever”."
+        },
+        {
+            "name": "Diabetes",
+            "description": "Diabetes adalah penyakit yang berlangsung lama atau kronis serta ditandai dengan kadar gula (glukosa) darah yang tinggi atau di atas nilai normal. Glukosa yang menumpuk di dalam darah akibat tidak diserap sel tubuh dengan baik dapat menimbulkan berbagai gangguan organ tubuh. Jika diabetes tidak dikontrol dengan baik, dapat timbul berbagai komplikasi yang membahayakan nyawa penderita."
+        },
+        {
+            "name": "Difteri",
+            "description": "Difteri adalah infeksi bakteri yang umumnya menyerang selaput lendir pada hidung dan tenggorokan, serta terkadang dapat memengaruhi kulit. Penyakit ini sangat menular dan termasuk infeksi serius yang berpotensi mengancam jiwa."
+        },
+        {
+            "name": "E. coli",
+            "description": "Escherichia coli atau disingkat E. coli adalah bakteri yang umum ditemukan di dalam usus manusia. Bakteri ini terdiri beberapa jenis dan sebagian besar di antaranya tidak berbahaya. Itu artinya bahwa hanya segelintir jenis bakteri E. coli yang dapat merugikan kesehatan."
+        },
+        {
+            "name": "Gagal Jantung",
+            "description": "Gagal jantung adalah kondisi saat otot jantung menjadi sangat lemah sehingga tidak bisa memompa cukup darah ke seluruh tubuh. Kondisi ini dikenal juga dengan istilah gagal jantung kongestif."
         }
     ],
     "symptoms": [
         {
+            "name": "Muncul floaters",
+            "diseases": [
+                "Ablasi Retina"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Penglihatan kabur",
+            "diseases": [
+                "Ablasi Retina"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Muncul kilat cahaya",
+            "diseases": [
+                "Ablasi Retina"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Nyeri pada anus",
+            "diseases": [
+                "Abses Anus"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Terasa tertusuk",
+            "diseases": [
+                "Abses Anus"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Terasa tertusuk",
+            "diseases": [
+                "Abses Anus"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Iritasi kulit anus",
+            "diseases": [
+                "Abses Anus"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Keluar nanah di anus",
+            "diseases": [
+                "Abses Anus"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sembelit",
+            "diseases": [
+                "Abses Anus"
+            ],
+            "variants": []
+        },
+        {
             "name": "Demam",
             "diseases": [
-                "Abses Gigi"
+                "Abses Anus",
+                "Abses Gigi",
+                "Batuk",
+                "Demam",
+                "Difteri"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Tidak enak badan",
+            "diseases": [
+                "Abses Anus"
             ],
             "variants": []
         },
@@ -78,7 +192,9 @@
         {
             "name": "Batuk",
             "diseases": [
-                "Alergi"
+                "Alergi",
+                "Batuk",
+                "Demam"
             ],
             "variants": [
                 "Batuk-batuk"
@@ -87,7 +203,10 @@
         {
             "name": "Sesak napas",
             "diseases": [
-                "Alergi"
+                "Alergi",
+                "Batuk",
+                "Difteri",
+                "Gagal Jantung"
             ],
             "variants": []
         },
@@ -166,18 +285,207 @@
         {
             "name": "Sakit perut",
             "diseases": [
-                "Alergi"
+                "Alergi",
+                "E. coli"
             ],
             "variants": []
         },
         {
             "name": "Muntah",
             "diseases": [
-                "Alergi"
+                "Alergi",
+                "Bronkitis",
+                "Demam",
+                "E. coli"
             ],
             "variants": [
                 "Muntah-muntah"
             ]
+        },
+        {
+            "name": "Badan terasa lemas",
+            "diseases": [
+                "Anemia",
+                "Batuk",
+                "Diabetes",
+                "Difteri"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Cepat lelah",
+            "diseases": [
+                "Anemia",
+                "Bronkitis",
+                "Demam",
+                "Gagal Jantung"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Kulit terlihat pucat",
+            "diseases": [
+                "Anemia"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Kulit terlihat pucat",
+            "diseases": [
+                "Anemia"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Kulit warna kuning",
+            "diseases": [
+                "Anemia"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Napas pendek",
+            "diseases": [
+                "Anemia"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Pusing",
+            "diseases": [
+                "Anemia"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Mata kunang-kunang",
+            "diseases": [
+                "Anemia"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Nyeri dada",
+            "diseases": [
+                "Anemia",
+                "Bronkitis"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Tangan terasa dingin",
+            "diseases": [
+                "Anemia"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Kaki terasa dingin",
+            "diseases": [
+                "Anemia"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sakit kepala",
+            "diseases": [
+                "Anemia",
+                "Demam"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sulit berkonsentrasi",
+            "diseases": [
+                "Anemia"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Kaki kram",
+            "diseases": [
+                "Anemia"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Pilek",
+            "diseases": [
+                "Batuk",
+                "Difteri"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Nyeri tenggorokan",
+            "diseases": [
+                "Batuk",
+                "Demam"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sulit menelan",
+            "diseases": [
+                "Batuk"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sulit menelan",
+            "diseases": [
+                "Batuk"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sulit menelan",
+            "diseases": [
+                "Batuk"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Linglung",
+            "diseases": [
+                "Bronkitis"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Menggigil",
+            "diseases": [
+                "Demam"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Dehidrasi",
+            "diseases": [
+                "Demam"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Dehidrasi",
+            "diseases": [
+                "Demam"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sering merasa haus",
+            "diseases": [
+                "Diabetes"
+            ],
+            "variants": []
+        },
+        {
+            "name": "Sering kencing",
+            "diseases": [
+                "Diabetes"
+            ],
+            "variants": []
         }
     ]
 }
